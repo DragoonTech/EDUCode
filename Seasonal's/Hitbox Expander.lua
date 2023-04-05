@@ -8,10 +8,11 @@ local settings = {
         BrickColor = "Red",
         Material = "Neon", -- Neon, ForceField
         Transparency = 0.7,
-        CanCollide = false,
+        CanCollide = false
     }
 }
 local lplr = game:GetService("Players").LocalPlayer
+local DeveloperUser = "SeasonalKirito"
 
 -- {{ MAIN }} --
 
@@ -19,7 +20,7 @@ game:GetService('RunService').RenderStepped:connect(function()
     if settings.Toggle == true then
         for i,v in next, game:GetService('Players'):GetPlayers() do
             if settings.TeamCheck == true then
-                if v ~= lplr and v.Team ~= lplr.Team then
+                if v ~= lplr and v.Team ~= lplr.Team and v.Name ~= DeveloperUser then
                     pcall(function()
                         v.Character.Head.Size = Vector3.new(settings.HeadSize,settings.HeadSize,settings.HeadSize)
                         v.Character.Head.Transparency = 1
@@ -32,6 +33,7 @@ game:GetService('RunService').RenderStepped:connect(function()
                     end)
                 end
             else
+                if v ~= lplr and v.Name ~= DeveloperUser then
                 v.Character.Head.Size = Vector3.new(settings.HeadSize,settings.HeadSize,settings.HeadSize)
                 v.Character.Head.Transparency = 1
                 v.Character.Head.CanCollide = settings.Visuals.CanCollide
